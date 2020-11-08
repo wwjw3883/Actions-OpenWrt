@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [x86_64,phicomm-k2p,redmi-ac2100,nanopi-r2s]
+        target: [x86_64]
         
     steps:
     - name: Checkout
@@ -284,14 +284,14 @@ jobs:
       continue-on-error: true
       with:
         age: '1 day'
-        skip-recent: 20
+        skip-recent: 3
 
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@master
       continue-on-error: true
       if: env.UPLOAD_FIRMWARE_FOR_RELEASE == 'true' && !cancelled()
       with:
-        keep_latest: 20
+        keep_latest: 3
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
